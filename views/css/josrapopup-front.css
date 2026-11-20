@@ -93,6 +93,23 @@
 .josrapopup-content {
     font-size: 15px;
     line-height: 1.5;
+    overflow-wrap: break-word;
+}
+
+/* Imágenes, vídeos y tablas puestos en el editor: nunca más anchos que el popup.
+   El editor les pone ancho y alto fijos; el alto se libera para no deformarlas. */
+.josrapopup-content img,
+.josrapopup-content video {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+.josrapopup-content iframe {
+    max-width: 100% !important;
+}
+
+.josrapopup-content table {
+    max-width: 100% !important;
 }
 
 .josrapopup-img-wrap {

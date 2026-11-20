@@ -34,7 +34,7 @@ class Josrapopup extends Module
     {
         $this->name = 'josrapopup';
         $this->tab = 'front_office_features';
-        $this->version = '1.4.0';
+        $this->version = '1.4.1';
         $this->author = 'Josra';
         $this->need_instance = 0;
         $this->ps_versions_compliancy = ['min' => '1.7.0.0', 'max' => _PS_VERSION_];

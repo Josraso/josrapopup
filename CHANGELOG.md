@@ -1,5 +1,9 @@
 # Changelog — Josra Popup Manager
 
+## 1.4.1 — 2026-11-20
+- Arreglado: las imágenes puestas dentro del editor de texto también se salían por la derecha en el móvil; ahora se ajustan al ancho del popup sin deformarse (igual vídeos, iframes y tablas).
+- Arreglado: al elegir «Imagen» en el tipo de contenido desaparecían los botones para volver a «Texto / HTML» y el editor seguía a la vista. Ahora los botones se quedan siempre y solo se ve lo que toca: con Texto, el título y el editor; con Imagen, la subida y las opciones de la imagen.
+
 ## 1.4.0 — 2026-11-20
 - Arreglado: en el móvil las imágenes del popup se salían por la derecha y quedaban cortadas. Ahora se ajustan al ancho de la pantalla manteniendo la proporción, con menos marco blanco, y la X de cerrar se ve también sobre imágenes oscuras.
 - Nuevo: vista previa. Desde la lista de popups o desde su ficha se abre la tienda con el popup, aunque esté desactivado, fuera de fechas o solo para ciertos clientes. El enlace sirve también en el móvil y no cuenta como visto.

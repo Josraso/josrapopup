@@ -314,8 +314,21 @@ class AdminJosraPopupController extends ModuleAdminController
         return <<<'HTML'
 <script>
 (function () {
+    // Campo por su nombre exacto o, si es multidioma, por "nombre_<idioma>" (content_1, title_2...).
+    // Antes buscaba "empieza por content_" y encontraba el selector content_type: al elegir
+    // Imagen se escondían los botones de tipo y se quedaba el editor a la vista.
     function groupFor(name) {
-        var el = document.querySelector('[name="' + name + '"]') || document.querySelector('[name^="' + name + '_"]');
+        var el = document.querySelector('[name="' + name + '"]');
+        if (!el) {
+            var re = new RegExp('^' + name + '_[0-9]+$');
+            var all = document.querySelectorAll('[name^="' + name + '_"]');
+            for (var i = 0; i < all.length; i++) {
+                if (re.test(all[i].getAttribute('name'))) {
+                    el = all[i];
+                    break;
+                }
+            }
+        }
         return el ? el.closest('.form-group') : null;
     }
     function show(name, visible) {
