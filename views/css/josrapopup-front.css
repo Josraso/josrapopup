@@ -44,8 +44,11 @@
     border-radius: 8px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
     width: 100%;
+    max-width: 100%;
     max-height: 90vh;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
     pointer-events: auto;
     transform: translateY(10px);
     transition: transform 0.25s ease;
@@ -57,21 +60,24 @@
 
 .josrapopup-close {
     position: absolute;
-    top: 8px;
-    right: 8px;
-    width: 32px;
-    height: 32px;
+    top: 6px;
+    right: 6px;
+    width: 34px;
+    height: 34px;
     border: none;
-    background: rgba(0, 0, 0, 0.06);
+    color: #222;
+    /* Blanco con sombra: se ve también encima de una imagen oscura */
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
     border-radius: 50%;
     font-size: 20px;
     line-height: 1;
     cursor: pointer;
-    z-index: 1;
+    z-index: 2;
 }
 
 .josrapopup-close:hover {
-    background: rgba(0, 0, 0, 0.12);
+    background: #fff;
 }
 
 .josrapopup-inner {
@@ -89,15 +95,38 @@
     line-height: 1.5;
 }
 
-.josrapopup-inner img.josrapopup-img-responsive {
-    max-width: 100%;
-    height: auto;
+.josrapopup-img-wrap {
     display: block;
-    margin: 0 auto;
+    line-height: 0;
 }
 
+/* La imagen nunca se sale del popup ni de la pantalla, y mantiene la proporción */
 .josrapopup-inner img {
+    display: block;
+    max-width: 100%;
+    max-height: 80vh;
+    height: auto;
+    margin: 0 auto;
+    object-fit: contain;
     border-radius: 4px;
+}
+
+.josrapopup-inner img.josrapopup-img-responsive {
+    width: 100%;
+}
+
+/* Popups de imagen: poco marco blanco */
+.josrapopup-type-image .josrapopup-inner {
+    padding: 12px;
+}
+
+.josrapopup-preview-badge {
+    background: #fff3cd;
+    color: #664d03;
+    font-size: 13px;
+    padding: 6px 12px;
+    text-align: center;
+    border-top: 1px solid #ffe69c;
 }
 
 .josrapopup-btn {
@@ -117,7 +146,20 @@
 }
 
 @media (max-width: 480px) {
+    .josrapopup-overlay {
+        padding: 10px;
+    }
+
     .josrapopup-inner {
         padding: 20px;
+    }
+
+    .josrapopup-type-image .josrapopup-inner {
+        padding: 8px;
+    }
+
+    .josrapopup-title {
+        font-size: 19px;
+        padding-right: 30px;
     }
 }

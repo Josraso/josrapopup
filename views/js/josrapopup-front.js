@@ -110,21 +110,26 @@
         inner.className = 'josrapopup-inner';
 
         if (popup.content_type === 'image' && popup.image) {
+            box.classList.add('josrapopup-type-image');
             var imgWrapper = document.createElement(popup.image.link ? 'a' : 'div');
+            imgWrapper.className = 'josrapopup-img-wrap';
             if (popup.image.link) {
                 imgWrapper.href = popup.image.link;
             }
             var img = document.createElement('img');
             img.src = popup.image.url;
             img.alt = popup.title || '';
+            // La imagen nunca pasa del ancho del popup ni del alto de la pantalla y siempre
+            // mantiene la proporción (en el móvil se reduce en vez de salirse por los lados)
             if (popup.image.responsive) {
                 img.className = 'josrapopup-img-responsive';
-            }
-            if (popup.image.width) {
+            } else if (popup.image.width) {
                 img.style.width = popup.image.width + 'px';
             }
-            if (popup.image.height) {
-                img.style.height = popup.image.height + 'px';
+            if (popup.image.width && popup.image.height) {
+                img.style.aspectRatio = popup.image.width + ' / ' + popup.image.height;
+            } else if (popup.image.height) {
+                img.style.maxHeight = 'min(' + popup.image.height + 'px, 80vh)';
             }
             imgWrapper.appendChild(img);
             inner.appendChild(imgWrapper);
@@ -150,6 +155,12 @@
         }
 
         box.appendChild(inner);
+        if (popup.is_preview) {
+            var badge = document.createElement('div');
+            badge.className = 'josrapopup-preview-badge';
+            badge.textContent = 'Vista previa: solo la ves tú con este enlace';
+            box.appendChild(badge);
+        }
         overlay.appendChild(box);
 
         function closePopup() {

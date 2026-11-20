@@ -1,5 +1,9 @@
 # Changelog — Josra Popup Manager
 
+## 1.4.0 — 2026-11-20
+- Arreglado: en el móvil las imágenes del popup se salían por la derecha y quedaban cortadas. Ahora se ajustan al ancho de la pantalla manteniendo la proporción, con menos marco blanco, y la X de cerrar se ve también sobre imágenes oscuras.
+- Nuevo: vista previa. Desde la lista de popups o desde su ficha se abre la tienda con el popup, aunque esté desactivado, fuera de fechas o solo para ciertos clientes. El enlace sirve también en el móvil y no cuenta como visto.
+
 ## 1.3.0 — 2026-11-20
 - Arreglado: al editar un popup guardado sin fecha de inicio o de fin, salía «campo no válido» y no dejaba guardar. Las fechas vacías se guardan ahora como «sin límite», y los popups que ya estaban así se arreglan solos al actualizar.
 - Las fechas escritas sin segundos (2026-12-01 10:00) también se aceptan.

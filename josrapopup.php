@@ -34,7 +34,7 @@ class Josrapopup extends Module
     {
         $this->name = 'josrapopup';
         $this->tab = 'front_office_features';
-        $this->version = '1.3.0';
+        $this->version = '1.4.0';
         $this->author = 'Josra';
         $this->need_instance = 0;
         $this->ps_versions_compliancy = ['min' => '1.7.0.0', 'max' => _PS_VERSION_];
@@ -216,7 +216,18 @@ class Josrapopup extends Module
      */
     protected function renderPopupsForCurrentHook($hookName)
     {
-        $popups = $this->resolvePopups($hookName);
+        $preview = $this->getPreviewPopup();
+        if ($preview !== false) {
+            // Vista previa: solo ese popup, una vez por página, en el primer hook que se pinte
+            static $previewDone = false;
+            if ($previewDone || $preview === null) {
+                return '';
+            }
+            $previewDone = true;
+            $popups = [$preview];
+        } else {
+            $popups = $this->resolvePopups($hookName);
+        }
         if (empty($popups)) {
             return '';
         }
@@ -229,6 +240,58 @@ class Josrapopup extends Module
         ]);
 
         return $this->display(__FILE__, 'views/templates/hook/popup.tpl');
+    }
+
+    /** Clave de la vista previa de un popup (el enlace no se puede adivinar para otro popup) */
+    public function getPreviewToken($idPopup)
+    {
+        return Tools::substr(hash_hmac('sha256', 'josrapopup-preview-' . (int) $idPopup, _COOKIE_KEY_), 0, 20);
+    }
+
+    /** Enlace a la tienda que enseña el popup aunque esté desactivado, fuera de fechas o segmentado */
+    public function getPreviewUrl($idPopup)
+    {
+        return $this->context->link->getPageLink('index', true, null, [
+            'josrapopup_preview' => (int) $idPopup,
+            'josrapopup_token' => $this->getPreviewToken($idPopup),
+        ]);
+    }
+
+    /**
+     * Popup pedido en vista previa: false si no hay vista previa en esta página, null si el
+     * enlace no es válido, o los datos del popup listos para el JS (sale al cargar, siempre,
+     * sin contar como visto).
+     */
+    protected function getPreviewPopup()
+    {
+        static $cache;
+        if ($cache !== null) {
+            return $cache['popup'];
+        }
+        $cache = ['popup' => false];
+
+        $idPopup = (int) Tools::getValue('josrapopup_preview');
+        if (!$idPopup) {
+            return false;
+        }
+        $cache['popup'] = null;
+        if (!hash_equals($this->getPreviewToken($idPopup), (string) Tools::getValue('josrapopup_token'))) {
+            return null;
+        }
+        $popup = new JosraPopupModel($idPopup, (int) $this->context->language->id, (int) $this->context->shop->id);
+        if (!Validate::isLoadedObject($popup)) {
+            return null;
+        }
+
+        $data = $this->formatPopupForFront($popup);
+        $data['trigger_type'] = 'load';
+        $data['trigger_delay'] = 0;
+        $data['frequency_type'] = 'always';
+        $data['is_customer_logged'] = false;
+        $data['is_preview'] = true;
+        $cache['popup'] = $data;
+
+        return $data;
     }
 
     /**
