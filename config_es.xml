@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>josrapopup</name>
+    <displayName><![CDATA[Josra Popup Manager]]></displayName>
+    <version><![CDATA[1.3.0]]></version>
+    <description><![CDATA[Crea y programa popups ilimitados: segmentaci&oacute;n por grupo, categor&iacute;a y producto, control de p&aacute;ginas, triggers y frecuencia de visualizaci&oacute;n.]]></description>
+    <author><![CDATA[Josra]]></author>
+    <tab><![CDATA[front_office_features]]></tab>
+	<confirmUninstall><![CDATA[¿Seguro que quieres desinstalar? Se perderán todos los popups configurados.]]></confirmUninstall>
+    <is_configurable>1</is_configurable>
+    <need_instance>0</need_instance>
+</module>
