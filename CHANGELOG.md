@@ -1,5 +1,8 @@
 # Changelog — Josra Popup Manager
 
+## 1.4.2 — 2026-11-22
+- Arreglado: en PrestaShop 9 la lista de popups y la ficha de un popup guardado daban error por el botón «Vista previa» de la 1.4.0. En PrestaShop 8 funcionaba.
+
 ## 1.4.1 — 2026-11-20
 - Arreglado: las imágenes puestas dentro del editor de texto también se salían por la derecha en el móvil; ahora se ajustan al ancho del popup sin deformarse (igual vídeos, iframes y tablas).
 - Arreglado: al elegir «Imagen» en el tipo de contenido desaparecían los botones para volver a «Texto / HTML» y el editor seguía a la vista. Ahora los botones se quedan siempre y solo se ve lo que toca: con Texto, el título y el editor; con Imagen, la subida y las opciones de la imagen.

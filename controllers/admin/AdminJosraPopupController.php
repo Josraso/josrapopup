@@ -198,8 +198,8 @@ class AdminJosraPopupController extends ModuleAdminController
         // Popup ya guardado: enlace para verlo en la tienda aunque no esté activo
         if (Validate::isLoadedObject($popup)) {
             $formHtml = '<div class="alert alert-info">'
-                . $this->l('Para ver este popup en la tienda aunque esté desactivado, fuera de fechas o solo para ciertos clientes, abre la vista previa (también en el móvil). Muestra lo último que hayas guardado.')
-                . ' <a class="btn btn-default" href="' . Tools::safeOutput($this->module->getPreviewUrl((int) $popup->id)) . '" target="_blank" rel="noopener"><i class="icon-eye"></i> ' . $this->l('Vista previa') . '</a>'
+                . $this->module->l('Para ver este popup en la tienda aunque esté desactivado, fuera de fechas o solo para ciertos clientes, abre la vista previa (también en el móvil). Muestra lo último que hayas guardado.')
+                . ' <a class="btn btn-default" href="' . Tools::safeOutput($this->module->getPreviewUrl((int) $popup->id)) . '" target="_blank" rel="noopener"><i class="icon-eye"></i> ' . $this->module->l('Vista previa') . '</a>'
                 . '</div>' . $formHtml;
         }
 
@@ -537,8 +537,8 @@ HTML;
     /** Acción «Vista previa» de la lista: abre la tienda con el popup, aunque esté desactivado */
     public function displayPreviewLink($token, $id, $name = null)
     {
-        return '<a href="' . Tools::safeOutput($this->module->getPreviewUrl((int) $id)) . '" target="_blank" rel="noopener" title="' . $this->l('Vista previa') . '">'
-            . '<i class="icon-eye"></i> ' . $this->l('Vista previa') . '</a>';
+        return '<a href="' . Tools::safeOutput($this->module->getPreviewUrl((int) $id)) . '" target="_blank" rel="noopener" title="' . $this->module->l('Vista previa') . '">'
+            . '<i class="icon-eye"></i> ' . $this->module->l('Vista previa') . '</a>';
     }
 
     /** Fecha vacía o a cero: el popup no tiene límite por ese lado */

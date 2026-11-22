@@ -2,7 +2,7 @@
 <module>
     <name>josrapopup</name>
     <displayName><![CDATA[Josra Popup Manager]]></displayName>
-    <version><![CDATA[1.4.1]]></version>
+    <version><![CDATA[1.4.2]]></version>
     <description><![CDATA[Crea y programa popups ilimitados: segmentaci&oacute;n por grupo, categor&iacute;a y producto, control de p&aacute;ginas, triggers y frecuencia de visualizaci&oacute;n.]]></description>
     <author><![CDATA[Josra]]></author>
     <tab><![CDATA[front_office_features]]></tab>
